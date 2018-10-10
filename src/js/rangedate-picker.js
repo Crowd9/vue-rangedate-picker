@@ -262,7 +262,7 @@ export default {
         return null
       }
       const dateparse = new Date(Date.parse(date))
-      return fecha.format(new Date(dateparse.getFullYear(), dateparse.getMonth(), dateparse.getDate() - 1), format)
+      return fecha.format(new Date(dateparse.getFullYear(), dateparse.getMonth(), dateparse.getDate()), format)
     },
     getDayIndexInMonth: function (r, i, startMonthDay) {
       const date = (this.numOfDays * (r - 1)) + i
@@ -293,7 +293,7 @@ export default {
       return newData
     },
     selectFirstItem (r, i) {
-      const result = this.getDayIndexInMonth(r, i, this.startMonthDay) + 1
+      const result = this.getDayIndexInMonth(r, i, this.startMonthDay)
       this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart,
       this.activeYearStart))
       if (this.dateRange.start && this.dateRange.end) {
@@ -304,7 +304,7 @@ export default {
       }
     },
     selectSecondItem (r, i) {
-      const result = this.getDayIndexInMonth(r, i, this.startNextMonthDay) + 1
+      const result = this.getDayIndexInMonth(r, i, this.startNextMonthDay)
       this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startNextActiveMonth,
       this.activeYearEnd))
       if (this.dateRange.start && this.dateRange.end) {
@@ -312,8 +312,8 @@ export default {
       }
     },
     isDateSelected (r, i, key, startMonthDay, endMonthDate) {
-      const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
-      if (result < 2 || result > endMonthDate + 1) return false
+      const result = this.getDayIndexInMonth(r, i, startMonthDay)
+      if (result < 1 || result > endMonthDate) return false
 
       let currDate = null
       if (key === 'first') {
@@ -325,8 +325,8 @@ export default {
         (this.dateRange.end && this.dateRange.end.getTime() === currDate.getTime())
     },
     isDateInRange (r, i, key, startMonthDay, endMonthDate) {
-      const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
-      if (result < 2 || result > endMonthDate + 1) return false
+      const result = this.getDayIndexInMonth(r, i, startMonthDay)
+      if (result < 1 || result > endMonthDate) return false
 
       let currDate = null
       if (key === 'first') {
