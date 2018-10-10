@@ -51,8 +51,9 @@ const defaultPresets = function (i18n = defaultI18n) {
   return {
     today: function () {
       const n = new Date()
-      const startToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0)
-      const endToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 23, 59)
+      const startToday = new Date(n.getFullYear(), n.getMonth(), n.getDate())
+      const endToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
+      endToday.setSeconds(endToday.getSeconds() - 1)
       return {
         label: presetRangeLabel[i18n].today,
         active: false,
@@ -64,8 +65,9 @@ const defaultPresets = function (i18n = defaultI18n) {
     },
     thisMonth: function () {
       const n = new Date()
-      const startMonth = new Date(n.getFullYear(), n.getMonth(), 2)
-      const endMonth = new Date(n.getFullYear(), n.getMonth() + 1, 1)
+      const startMonth = new Date(n.getFullYear(), n.getMonth())
+      const endMonth = new Date(n.getFullYear(), n.getMonth() + 1)
+      endMonth.setSeconds(endMonth.getSeconds() - 1)
       return {
         label: presetRangeLabel[i18n].thisMonth,
         active: false,
@@ -77,8 +79,9 @@ const defaultPresets = function (i18n = defaultI18n) {
     },
     lastMonth: function () {
       const n = new Date()
-      const startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 2)
-      const endMonth = new Date(n.getFullYear(), n.getMonth(), 1)
+      const startMonth = new Date(n.getFullYear(), n.getMonth() - 1)
+      const endMonth = new Date(n.getFullYear(), n.getMonth())
+      endMonth.setSeconds(endMonth.getSeconds() - 1)
       return {
         label: presetRangeLabel[i18n].lastMonth,
         active: false,
@@ -90,8 +93,9 @@ const defaultPresets = function (i18n = defaultI18n) {
     },
     last7days: function () {
       const n = new Date()
-      const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 5)
-      const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
+      const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 7)
+      const end = new Date(n.getFullYear(), n.getMonth(), n.getDate())
+      end.setSeconds(end.getSeconds() - 1)
       return {
         label: presetRangeLabel[i18n].lastSevenDays,
         active: false,
@@ -103,8 +107,9 @@ const defaultPresets = function (i18n = defaultI18n) {
     },
     last30days: function () {
       const n = new Date()
-      const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 29)
-      const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
+      const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 30)
+      const end = new Date(n.getFullYear(), n.getMonth(), n.getDate())
+      end.setSeconds(end.getSeconds() - 1)
       return {
         label: presetRangeLabel[i18n].lastThirtyDays,
         active: false,
@@ -251,7 +256,6 @@ export default {
       }
       this.isOpen = !this.isOpen
       this.showMonth = !this.showMonth
-      return
     },
     getDateString: function (date, format = this.format) {
       if (!date) {
