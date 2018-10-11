@@ -62,7 +62,7 @@
 
             <div class="card-content">
               <div class="daterange-wrapper">
-                <vue-rangedate-picker @selected="onDateSelected" i18n="EN">
+                <vue-rangedate-picker v-model="selectedDate" i18n="EN">
                 </vue-rangedate-picker>
               </div>
             </div>
@@ -79,7 +79,7 @@
 
             <div class="card-content">
               <div class="daterange-wrapper">
-                <vue-rangedate-picker @selected="onDateSelected" i18n="EN" format="YYYY-MM-DD hh:mm:ss">
+                <vue-rangedate-picker @input="onDateSelected" i18n="EN" format="YYYY-MM-DD hh:mm:ss">
                 </vue-rangedate-picker>
               </div>
             </div>
@@ -96,7 +96,7 @@
 
             <div class="card-content">
               <div class="daterange-wrapper">
-                <vue-rangedate-picker @selected="onDateSelected" i18n="EN" righttoleft="true">
+                <vue-rangedate-picker @input="onDateSelected" i18n="EN" righttoleft="true">
                 </vue-rangedate-picker>
               </div>
             </div>
@@ -116,7 +116,7 @@
 
             <div class="card-content">
               <div class="compact-wrapper">
-                <vue-rangedate-picker @selected="onDateSelected" compact="true" i18n="EN">
+                <vue-rangedate-picker @input="onDateSelected" compact="true" i18n="EN">
                 </vue-rangedate-picker>
               </div>
             </div>

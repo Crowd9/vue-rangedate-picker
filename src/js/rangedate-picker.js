@@ -154,7 +154,7 @@ export default {
       type: Object,
       default: () => {}
     },
-    initRange: {
+    value: {
       type: Object,
       default: () => null
     },
@@ -196,11 +196,19 @@ export default {
     if (this.isCompact) {
       this.isOpen = true
     }
+    if (this.value) {
+      this.dateRange.start = this.value.start
+      this.dateRange.end = this.value.end
+    }
     if (this.activeMonthStart === 11) this.activeYearEnd = this.activeYearStart + 1
   },
   watch: {
-    startNextActiveMonth: function (value) {
-      if (value === 0) this.activeYearEnd = this.activeYearStart + 1
+    startNextActiveMonth: function (to) {
+      if (to === 0) this.activeYearEnd = this.activeYearStart + 1
+    },
+    value: function (to) {
+      this.dateRange.start = to.start
+      this.dateRange.end = to.end
     }
   },
   computed: {
@@ -363,7 +371,7 @@ export default {
       this.activeYearEnd = this.dateRange.end.getFullYear()
     },
     setDateValue: function () {
-      this.$emit('selected', this.dateRange)
+      this.$emit('input', this.dateRange)
       if (!this.isCompact) {
         this.toggleCalendar()
       }

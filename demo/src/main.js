@@ -5,8 +5,8 @@ var app = new Vue({
   data () {
     return {
       selectedDate: {
-        start: '',
-        end: ''
+        start: new Date(),
+        end: new Date()
       }
     }
   },
